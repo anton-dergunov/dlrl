@@ -130,9 +130,59 @@ TODO Walk over the example from the notebook of the lecture
 TODO What if GPUs are different? How does it handle this?
 
 
+### Implementing Deep Q-Networks (DQN) in PyTorch
+
+Slides:
+bit.ly/4f4joXO
+https://docs.google.com/presentation/d/1Fi5Q0_oSg-mKNGFjJfMczJpFGX-AHFMHJtZIXPBFmLM/edit?pli=1
+
+Code:
+http://bit.ly/46mkMTs
+[Google Colab](https://colab.research.google.com/drive/1YCWxmpBGv-wj0RYjYvyYFxDGaUdZ9QVy?usp=sharing)
+
+Gymnasium library
+MountainCar-v0: underpowered car needs to learn to roll back and forth to build momentum.
+
+Deep Q-Network
+Q*(s, a): expected total future reward
+
+TODO Explain the loss function for Q-Learning algorithm
+
+Key innovations:
+- Experience replay buffer. TODO Why we need it? The reason that is it called off-policy algorithm. What is this?
+- Target network
+- $\epsilon$-greedy exploration
+
+TODO What does `pip install package[strange_word]` does for strange word?
+
+TODO * arguments in Python
+
+
 ### Cohere, Communicating in Science
 
 Jay Alammar
 
-TBD
+TODO Model merging?
 
+TODO Read paper on Command A in arxiv; and "Back to Basics: Revisiting REINFORCE..."
+TODO RLOO youtube video (introduction to RL)
+
+TODO Read "The Illustrated DeepSeek-R1" article
+
+SWI bench
+
+Youtube video "From Next Token Prediction to ..."
+
+"Machine Learning Research Communication via Illustrated and Interactive Web Articles"
+
+Hack: Write an easy explanation of a paper & send it to authors.
+
+Wait for slides from Jay
+
+
+### Startup panel
+
+- "Rejection could be a career-defining event."
+- "Show the messy, get feedback faster."
+- "What can you build that people are willing to pay for - that's what matters."
+- Recommendation for book "Crossing the chasm"
