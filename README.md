@@ -186,3 +186,168 @@ Wait for slides from Jay
 - "Show the messy, get feedback faster."
 - "What can you build that people are willing to pay for - that's what matters."
 - Recommendation for book "Crossing the chasm"
+
+
+### What is a sequence language model?
+
+Peter West
+
+Open source model Tülu3
+
+Originally: probability of text.
+LM(x) = P(x) = P(w1, w2,.. wn)
+Chain rule: P(w1) P(w2 | w1) P(w3 | w1, w2) * ... * P(wn | w1, ... wn-1)
+
+Why not N-grams? Sparsity of language.
+Papers "Infini-gram...", "OLMoTrace...", "AI as Humanity's Salieri..."
+
+Want to evaluate: fit(LM, P)
+$NLL = -sum_{x~P} \log LM(x)$
+Perplexity: $PPL = e^{NLL}$
+
+Basic N-gram models -> N-gram+++ (Kneser-Ney)
+
+| Model           | PPL  |
+| --------------- | ---- |
+| KN 5gram        | 93.7 |
+| Feed Forward NN | 85.1 |
+| Recurrent NN    | 80.0 |
+| 4xRNN + KN5     | 73.5 |
+
+https://paperswithcode.com/sota/language-modelling-on-penn-treebank-word
+
+Transformers and attention: test perplexity dropped a lot.
+
+GPT-3 and few-shot -> post-training alignment -> InstructGPT
+
+TODO Scaling laws for LLMs (how large dataset). How to spend the budget for better model perplexity?
+TODO Pluralistic values? Different users have different needs.
+TODO Add longer context without changing the model
+
+Issues with allignment
+
+Can LLMs generate one random number?
+Aligned models capture human bias. Base models do better.
+
+Can LLMs generate a sequence of random numbers?
+Aligned models and base model do better.
+
+Human bias: repetitions are bad.
+Aligned models capture this bias. Base models do better.
+
+Does this affect deeper behaviours?
+"Write a 4-line poem about coffee" several times
+Aligned - repetitive, most pleasant.
+Base - different, most original.
+
+
+### Intro to RL
+
+Marlos C. Machado
+
+RL is about learning from evaluative feedback rather than instructive.
+A learning system that wants something, and that adapts its behaviour to get that.
+
+```
+NewEstimate <- OldEstimate + StepSize [Target - OldEstimate]
+```
+
+$Q_{n+1} \gets Q_n + \alpha [R_n - Q_n]$
+
+Delayed credit assignment
+
+Value functions are functions of states that estimate how good it is for the agnet to be in a given state.
+
+Policy is a mapping of states to actions.
+
+Monte Carlo -> Temporal difference:
+$V(S_t) \gets V(S_t) ...$
+
+TODO Temporal difference learning allow for boostrapping. What does it mean?
+
+TODO Revise the formulas and examples
+
+Q-learning: what is the best action that I could have done?
+
+What makes RL problems unique
+- Exploration
+- Delayed credit assignment
+- Generalization
+
+Directly optimizing the policy being learned
+Instead of learning value function - learn the policy directly
+
+Policy gradient theorem
+
+REINFORCE: Monte-Carlo Policy-Gradient Control
+
+
+### Intro to Computer Vision
+
+Ke Li
+
+Vision is the richest sensory input, accounts for 83% of information captured with all senses.
+50% of brain cells is devoted to vision processing.
+
+Book "Foundations of Computer Vision" by Torralba et al
+[Foundations of Computer Vision](https://visionbook.mit.edu/)
+
+Loss of information: 3d -> 2d
+
+Solutions:
+1. Multiple views
+2. Model all hypotheses
+
+Spacial correlation?
+
+Trick: subsample and use as input all subsampled images (so that kernels can work on various input sizes).
+
+3d representations:
+- Voxel Grids: cubic in the length of the smallest feature
+- Polygonal Meshes: only represents the surface, quadratic in the length of the smallest feature
+- Point Cloud
+
+3D Gaussian Splatting (3DGS)
+
+Proximity Attention Point Rendering (PAPR)
+
+
+### Empirical AI Research
+
+Adam White
+
+Paper "Machine Learning that Matters"
+Paper "Deep RL that Matters"
+
+Papers:
+- Crash course in statistics for RL:
+    - A hitchhiker's guide to statistical comparisons of reinforcement learning algorithms
+- Dealing with hyperparameters:
+    - Evaluating the performance of reinforcement learning algorithms
+- Insights from small scale experiments:
+    - Revisiting rainbow: promoting more insightful and inclusive deep reinforcement learning research
+- Smth else
+    - Deep RL at the edge of the statistical precipice
+
+Paper "The cross-environment hyperparameter setting benchmark for RL"
+
+Do not use standard error.
+
+Tolerance intervals
+
+Key messages
+- You need more runs/replications than you think
+- Take a statistical points of view
+- Watch out for untuned baselines
+- Appeal to authority fallacy
+
+Comprehensive guide to experiments in RL:
+Paper "Empirical Design in Reinforcement Learning"
+
+Hyperparameters in RL
+
+Paper "A method for evaluating hyperparameters sensitivity in reinforcement learning"
+
+
+
+
