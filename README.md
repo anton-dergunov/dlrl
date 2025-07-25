@@ -349,5 +349,390 @@ Hyperparameters in RL
 Paper "A method for evaluating hyperparameters sensitivity in reinforcement learning"
 
 
+### Generative AI for 3D Character Animation
 
+Muhammad Gohar Javed
+
+Usage in hospital: if any person moves in a different way than the normal person would.
+
+Conditional signal for generative model: can be text or something else.
+
+Representation of 3D motions: sequence of 3D poses. Each pose consists of a fixed kinematic tree, containing a fixed number of joints while connecting them with bones.
+
+- Position or Velocity
+- Orientation
+
+Gen AI Techniques:
+- GANs
+- VAEs
+- Diffusion Models, Autoregressive Transformers
+
+Masked generative models
+
+Motion tokens:
+Continuous Latent Space (auto encoders)
+Codebook?
+
+Why discrete latent space?
+Transformers work in discrete world, we want to reuse this. And we want to use with LLMs.
+
+Paper "MoMask: Generative Masked Modeling of 3D Human Motions"
+Residual Vector Quantized Variational AutoEncoder (VQ-VAE)
+
+Explore MoMask for text2motion generation
+https://ericguo5513.github.io/momask
+
+Paper "InterMask: 3D Human Interaction Generation via Collaborative Masked Modeling"
+
+Paper "Generative Human Motion Stylization in Latent Space" ICLR 2024
+
+Future directions:
+- root position
+- other joints (hands) and facial emotions
+- data acquisition
+- physical plausibility
+
+Paper "Go to Zero: Towards Zero-shot motion..."
+Paper "ReinDiffuse: Crafting Physically Plausible motions with Reinforced Diffusion Model" WACV 2025
+
+
+### RL in the Real World
+
+Exploration remains an open question in RL.
+
+Make sure agent can learn one goal first.
+
+Performance degradation when going from offline to online.
+
+Dealing with non-stationary.
+
+
+### Model-Based RL
+
+Martha White
+
+Value iteration
+
+Approximate dynamic programming
+
+Model-based RL: How do we use RL when the agent needs to learn a model?
+
+What are possible learned models?
+Most obvious: p(s', r | s, a)
+
+Dyna
+Key idea: use RL updates on simulated experience
+
+It is hard to beat experience replay.
+
+Dyna-Q
+
+Dyna = background planning
+
+Important choices:
+- The type of model
+- Search-control (from which state to do planning?)
+
+Simple example of Dyna: Experience Replay.
+
+Non-parametric model in ML: do not learn parameters of the model.
+
+Advantages of learned model over a transition buffer:
+- Compactness
+- Coverage
+- Modularity
+- Generalization
+
+It can be had to beat ER.
+Model-based RL remains less common than model-free (RL + ER).
+
+Make sure models on agent state.
+Model in latent space, not in observation space.
+
+Expectation vs sample models.
+
+Rollouts vs Temporal Abstraction
+Errors will accumulate
+Small errors in model accuracy can cause big errors in values
+
+Temporal abstraction:
+Define macro-actions. Directly model the outcome.
+Instead of modelling all options, let the agent choose which to learn.
+How to describe options to learn? Open unsolved problem.
+
+Search control strategies: how to pick (s, a)
+
+Other ways to use models
+
+
+### Deep RL
+
+Marlos C. Machado
+
+https://cs231n.github.io/understanding-cnn/
+
+Focus on generalization in this lecture. The agent can't visit every state-action combination.
+
+RL were simply consumers of supervised learning.
+
+Paper "The Arcade Learning Environment: An Evaluation Platform for General Agents"
+
+Paper "Playing Atari with Deep RL"
+
+RL algs. are unstable when using NNs for function approx.
+
+Deep Q-Networks (DQN)
+- Decorelates samples (and reuses them) with an experience replay buffer.
+- Stabilizes the target it is regressing to using a target network.
+- Lots of pre-processing and normalization to allow for the same hyperparameters.
+
+Lots of details are in the appendix.
+
+Prioritized experience replay
+Double DQN
+Dualy networks
+
+Directly optimizing the policy instead of learning the value function:
+- Learn how much we prefer an action over the other
+- Define a stochastic policy
+
+In partial observable situation stochastic policy is optimal (deterministic is not).
+
+Value based methods: almost always off-policy.
+Policy gradient methods:
+- On-policy
+- Off-policy
+
+Off-policy: mismatch in data distribution between what you are learning.
+
+PPO: on-policy.
+
+The 37 Implementation Details of Proximal Policy Optimization
+[The 37 Implementation Details of Proximal Policy Optimization · The ICLR Blog Track](https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/)
+
+Paper [The Phenomenon of Policy Churn](https://arxiv.org/abs/2206.00730)
+
+
+### Inverse Problems
+
+The number of equations is less than the number of unknowns.
+
+**Optimization**:
+argmin (y-f(x))^2 + S(x) (regularization)
+**Bayesian perspective**:
+argmin -log p(y | x) + -log p(x)
+
+Activation functions as proximal mappings of regularization prior.
+
+Why unroll neural networks?
+- Data-limited generalization
+- Interpretability
+- Efficient architecture
+
+Interpretable deep learning for deconvolutional analysis of neural signals
+
+Generative models as learned priors
+
+Solving partial differential equations with diffusion
+
+
+### Transformers & Generative AI
+
+finbarrtimbers@gmail.com
+X: finbarrtimbers
+https://finbarr.ca/transformers
+
+Stable diffusion
+ChatGPT
+
+What made gen AI possible?
+- The transformer
+- Pre-training
+
+Transformer is basically a large MLP. So, at lower levels of compute it does worse than specialized architectures, but better with more compute.
+
+Scaling laws:
+Larger models require fewer samples to reach the same performance.
+Kaplan scaling vs Chinchilla scaling
+TODO Check them
+
+Attention:
+- Full
+- Chunked (thought to be partially responsible for Llama4's issues)
+- Sliding window attention
+
+Do we actually need multiple heads?
+- Grouped-query (used in practice)
+- Multi-query
+They work almost as well
+
+Normalization
+Moved to pre-norm from post-norm LayerNorm
+Pre-norm: there is a straight shot from the end to the beginning
+Post-norm: gradient has gone through Nx LayerNorms, so shrinks/explodes
+
+Frontiers of gen AI:
+1. Running out of data -> RL
+2. Context length (context doesn't really work past 100k tokens; no sparse attention mechanism that works)
+3. Optimizers (Muon uses second order information)
+
+Used to be an interview question in DeepMind: why don't we use second order optimizers?
+
+RL with LLMs:
+- RL on human feedback (RLHF)
+- RL with verifiable rewards
+
+Extremely under-explored; basic RL ideas have yet to be explored. Very little work on e.g. replay buffers.
+
+OpenAI uses perplexity on their code base.
+Can you reimplement Linux tools with a single prompt?
+
+
+### Multi-Agent RL
+
+Matt Taylor
+https://irll.ca
+
+Multi-agent systems:
+- Homogeneous/heterogeneous
+- Communicating?
+- Cooperative / competitive / mixed
+
+MARL:
+- Controlling a single agent
+- Could control a group of agent
+- Could control all agents
+
+OpenAI Hide and Seek
+
+Current research topics:
+- How much modeling is useful?
+- Centralized/Decentralized Training & Execution; Centralized Training Decentralized Execution
+- Where do rewards come from? (e.g. is crashing into a person worse than crash into a car?)
+- What happens when 1+ of agents is a human?
+- Mean Field RL (e.g. 10 closest cards)
+- Knowledge sharing / transfer / teaching (e.g. one device teaches another)
+
+http://marl-book.com
+"Multi-Agent Reinforcement Learning. Foundations and Modern Approaches"
+https://www.khoury.northeastern.edu/home/camato/tutorials.html
+See other resources in the slides.
+
+
+### Introduction to Design Sprint
+
+Clay Lowe
+
+5-day design sprint:
+- Understand
+- Define
+- Sketch
+- Prototype
+- Test
+
+Book "Sprint. Solve big problems and test new ideas in just five days"
+https://www.thesprintbook.com
+
+Team commitments:
+- No distractions
+- Respect the time frame and the breaks
+- Engagement
+- Work alone together
+
+
+### The GenAI Paradigm in Healthcare
+
+Using LLM (llama) for classification of CT reports. Tuned prompts.
+
+Patient notes.
+
+vLLM inference engine
+[GitHub - vllm-project/vllm: A high-throughput and memory-efficient inference and serving engine for LLMs](https://github.com/vllm-project/vllm)
+
+WhisperX
+
+Llama-3-OpenBioLLM-70B
+
+OS Jenkins AI Scribe
+PHAIRlab@ualberta.ca
+
+Foundation models for human body scans
+How can we possibly label such a vast amount of data? RLHF
+
+
+### AI Ethics
+
+Geoffrey Rockwell
+University of Alberta
+www.geoffreyrockwell.com
+
+Montreal Declaration for Responsible AI
+https://www.montrealdeclaration-responsibleai.com
+
+https://www.rolls-royce.com/innovation/the-aletheia-framework.aspx
+https://learn.microsoft.com/en-us/azure/architecture/guide/responsible-innovation/judgementcall
+
+Businesses prefer to work with companies that are not a part of a scandal.
+Ethics does not make you money. Ethics saves you money when the time comes.
+
+
+### Debugging foundation models: the elephant in the room
+
+Randy Goebel
+
+GwenAI
+Manus
+Grok
+DeepSeek
+
+Silver et al. Reward is enough 2021
+
+https://www.concentrix.com/insights/blog/a-guide-to-the-evolution-of-ai/
+
+ASI = artificial superintelligence
+
+Gary Marcus blog on Midjourney picture of a man and unicorn.
+
+Neurosymbolic foundational models
+
+From Statistical Relational to Neuro-symbolic Artificial Intelligence
+https://arxiv.org/abs/2003.08316
+
+https://adamfard.com/blog/explainable-ai
+
+Model Editing
+https://arxiv.org/abs/2406.19354v1
+
+https://www.opemindresearch.org
+
+
+### Richard Sutton keynote. Welcome to the Era of Experience
+
+How do you notice intelligence? Purpose.
+
+Experience is the data you get during normal life.
+
+RL is powerful, because requires so little from people.
+- no labeled examples
+- ...
+
+Multiple objectives in RL. But reward is the ultimate goal. But to get reward, it is important to get other things.
+
+We are in the era of human data. Systems trained to predict humans' next words, not to predict or control the word.
+We need to enter the era of experience.
+Silver & Sutton "Welcome to the era of experience" (2025)
+
+Cooperation is humanity's super-power.
+It is good for economies to have agents with different goals.
+
+How to feel about AI?
+- The age of particles
+- The age of stars
+- The age of ~~life~~ replicators
+- The age of ~~machines~~ design
+
+Biological things are replicated. Technological things are created and they are easier to improve.
+
+What would it mean to take design all the way?
+Design things that are themselves capable of designing. This is what we do with AI.
 
