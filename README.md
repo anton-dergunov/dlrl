@@ -736,3 +736,207 @@ Biological things are replicated. Technological things are created and they are 
 What would it mean to take design all the way?
 Design things that are themselves capable of designing. This is what we do with AI.
 
+In addition to learning weights, we should learn step sizes. (Step size adaptation paper.)
+
+TODO See reading recommendation on Richard Sutton's web page.
+
+
+### Panel
+
+Sutten-Burreton model of classical conditioning? As temporal-difference learning
+
+Physics discoveries with ML (e.g. black hole): they included prior information.
+
+AI Scientist
+
+
+### Designing scalable and efficient NNs
+
+TODO Apply for RBC Borealis Research Internship Program. Deadline: 7 September
+[ML Research Internships - RBC Borealis](https://rbcborealis.com/internships/)
+
+Conditional Neural Processes
+
+Recurrent formulation of attention
+
+Rise of linear RNNs, linear attention, state-space models
+Parallel Scan algorithm (Blelloch, 1990)
+
+Methods:
+1. Attention as a recurrent NN (how?)
+2. Simplifying RNNs (drop hidden state dependencies: LSTM -> minLSTM)
+
+The idea is to use retrieval for cross attention: O(N) -> O(log(N))
+k-d-tree; use RL to search
+
+Mamba: bias for more recent tokens.
+
+
+### MLOps
+
+Apache Airflow
+mlflow
+
+"dvc pull"?
+"supervisorctl restart process"?
+
+DevOps considerations:
+- volume of use
+- acceptable latency
+- data causality
+- geo availability
+- SLA: failover, uptime constraints
+- pre-processing (features)
+- model & post processing privacy
+- service provider affinity (Google, AWS, Azure)
+- budget
+
+Shadeform
+
+[GitHub - casey/just: 🤖 Just a command runner](https://github.com/casey/just)
+
+ngrok
+[ngrok Agent CLI Quickstart \| ngrok documentation](https://ngrok.com/docs/getting-started/)
+
+Gradio
+
+HuggingFace Spaces
+ZeroGPU - free tier, might get or not
+
+Docker + FastAPI
+Use with HF Spaces as well
+
+Benchmarking and stress testing:
+Locust (`pip install locust`)
+(Simulates users accessing the API)
+
+
+### Search
+
+Sokoban
+Single-agent pathfinding
+
+Policy-guided heuristic search
+Three parts:
+1. Searching with a polity
+2. Searching with a policy and heuristic function
+3. Learning a policy
+
+Policy: probability of finding a solution
+Best-first search with probabilities
+
+P(n) = P(n') * P(n|n')
+Base: P(n0) = 1
+Search algorithm lacks completeness.
+
+Levin cost:
+d(n) / P(n) where d(n) is the depth of the tree, d(root) = 0
+d(n1) / P(n1) = 1/0.2 = 5
+d(n2) / P(n2) = 1/0.8 = 1.25
+
+Main property: the Levin cost of the goal plus 1 is an upper bound on the number of expansions.
+If we learn policies that minimize levin cost, then we minimize the search effect.
+
+Property 1: LevinTS performs the search in best-first order.
+Property 2: The sum of probabilities of leaf nodes of a tree is 1.
+
+Can we do better?
+
+Policy-guided heuristic search (PHS)
+
+PHS*
+
+Solution: context moels
+Use Levin cost -> shrinking the size of the tree
+
+If you need to solve combinatorial search problems, the Levin family should be your go-to option. Not MCTS.
+
+
+### Introduction to Optimization
+
+Mark Schmidt
+UBC
+
+https://www.cs.ubc.ca/~schmidtm/Courses/5XX-S22
+
+Gradient descent: Cauchy 1840s
+
+SGD converges with decreasing a_k.
+
+Polyak-Lojasiewicz Inequality and Invexity
+
+Non-linear conjugate gradient
+
+Question 1: How do I set the step size?
+
+GD:
+L (Lipschitz constant): how fat the gradient can change.
+a_k vs 2/L
+TODO: Run experiments that show this.
+Armijo Backtracking
+Malitsky-Mischenko
+Barzilai-Borwein
+Do not work for SGD in general
+
+SGD:
+$\sigma_k^2$ - variation in the gradients ("noise")
+size of gradient of overall function
+
+Two phases:
+- gradient dominated
+- noise dominated
+
+How to adjust the SGD step size?
+Most methods are bad.
+
+Weird dynamics:
+- Edge of stability
+- Initialization and warm-up
+- Catapults
+
+Question 2: How to pick batch size?
+
+GPT-3: 3 million batch size
+Google: batch size of millions
+Bigger batches lead to a longer gradient-dominated phase
+
+Gradually growing batch sizes
+
+Question 3: In what order should we process data?
+
+Random shuffling
+Importance sampling
+Curriculum learning (easy -> hard, but hard to define)
+  Near the end of training, use higher-quality or task-specific data
+
+Question 4: Are there faster algorithms than SGD?
+
+We have faster algorithms than SD (heavy-ball, conjugate gradient a momentum term, Nesterov's accelerated gradient, Newton's method)
+Faster than SGD? I depends:
+- In gradient-dominated phrase: yes
+- In noise-dominated phase: do not lead to faster convergence
+
+There are faster algorithms for the noise-dominated phrase: varience-reduced SGD (SAG and SVRG). But does not help for deep learning.
+
+Question 7: Should I just use Adam with default parameters?
+
+Algoperf: Adam wins the competition.
+
+For small batch sizes, Adam does not help.
+For large batch size, gap between Adam and SGD grows.
+
+Adam make similar progress on all labels.
+Adam outperforms SGD on vision datasets with heavy-tailed labels.
+
+Speedrunning and Muon
+Gradient of the step sizes
+
+
+### Robotics
+
+Dr. Jun Jin
+
+Embodied AI
+
+
+
