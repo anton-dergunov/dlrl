@@ -937,6 +937,81 @@ Gradient of the step sizes
 Dr. Jun Jin
 
 Embodied AI
+FiLM EfficientNet
+
+Action Expert
+DiT
+Pi-0
+
+How to generate robot motions?
+Gato
+RT1, RT2
+
+Diffusion-based Action Expert
+
+Paper "Emergent abilities of large language models"
+The turning points of "scaling law" in NLP tasks
+
+Article "Will scaling solve robotics?"
+
+Paper "From Machine Learning to Robotics: Challenges and Opportunities for Embodied Intelligence"
+
+
+### Student presentations
+
+flan-t5-small
+[google/flan-t5-small · Hugging Face](https://huggingface.co/google/flan-t5-small)
+
+Offline to online RL
+Paper "Accelerating online reinforcement learning with offline datasets"
+
+Environment:
+Minari
+Mujoco Hopper Trainer
+
+Big world hypothesis
+
+MuJoCo ant
+
+https://github.com/lupusorina/robot_training
+
+Med-DDPM data
+
+Paper "Fiarness through difference awareness: Measuring desired group discriminations..."
+
+DiffAware metric
+
+Model-based:
+- RMax
+- Model-based interval estimation with exploration bonus (MBIE-EB)
+Model-free:
+- Upper Confidence Bound UCB
+- Deep Q-Learning DQN
+
+KAN Kolmogorov-Arnold Networks
+
+[GitHub - mikelma/occam-shaving-rl](https://github.com/mikelma/occam-shaving-rl)
+
+Deep Deterministic Policy Gradient
+
+Paper "MetaMorph: Learning Universal controllers with Transformers"
+
+Paper "A simple framework for contrastive learning of visual representations"
+Paper "Contrastive representation learning for electroencephologram classification"
+
+Waymax
+
+Autonomous driving:
+Viet Nguyen, University of Toronto
+Hongzhou Yand, University of Calgary
+
+End-to-end autonomous driving: Challenges and frontiers (2024)
+TODO See history
+
+Waymo Open Dataset
+Waymax: An accelerated, data-driven simulator for large-scale autonomous driving research
+
+Sim2Real?
 
 
 
